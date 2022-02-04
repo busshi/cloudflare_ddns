@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  cron:
+    image: cron_ddns
+    build: ./
+    container_name: cron_ddns
+    volumes:
+      - ./cron_tasks/1min:/etc/periodic/1min/:ro
+      - ./cron_tasks/30min:/etc/periodic/30min/:ro
+      - ./cron_tasks/hourly:/etc/periodic/hourly/:ro
+      - ./entrypoint.sh:/usr/local/entrypoint.sh:ro
+    environment:
+      - TOKEN=${TOKEN}
+      - EMAIL=${EMAIL}
+    restart: unless-stopped

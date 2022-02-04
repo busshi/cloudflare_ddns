@@ -1,0 +1,2 @@
+.env
+cron_tasks/30min/updater
