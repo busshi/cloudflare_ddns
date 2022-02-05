@@ -1,0 +1,56 @@
+#!/bin/sh
+
+IP=$( curl -s ifconfig.me; echo )
+
+echo "[$(date)] Current IP: [${IP}]"
+
+
+update()
+{
+echo "Trying to change record..."
+res=$( curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records/${ID}" \
+    -H "X-Auth-Email: ${EMAIL}" \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json"      --data "{\"type\":\"A\",\"name\":\"${HOST}\",\"content\":\"${IP}\",\"ttl\":1,\"proxied\":true}" )
+[ "$(echo $res | jq .success)" = "true" ] && echo "Update successfull from [${OLD_IP}] ===> [${IP}]" || echo "Error while updating record... Do it manually!"
+
+}
+
+
+check()
+{
+ZONE_ID=$( curl -s -X GET "https://api.cloudflare.com/client/v4/zones" \
+    -H "X-Auth-Email: ${EMAIL}" \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json" | jq -r '.result[].id' )
+
+echo ""
+echo "[+] HOST: ${HOST}"
+#echo "Zone_ID: [${ZONE_ID}]"
+
+OLD_IP=$( curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records?name=${HOST}&type=A" \
+    -H "X-Auth-Email: ${EMAIL}" \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json" | jq -r '.result[].content')
+
+echo "Current registered IP: [${OLD_IP}]"
+
+if [ "$OLD_IP" = "$IP" ] ; then
+	echo "No need to change records...."
+else
+	ID=$( curl -s -X GET "https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/dns_records?name=${HOST}&type=A" \
+    -H "X-Auth-Email: ${EMAIL}" \
+    -H "Authorization: Bearer ${TOKEN}" \
+    -H "Content-Type: application/json" | jq -r '.result[].id' )
+	echo "Different IP detected! Getting zone_id to update record..."
+	update
+fi
+}
+
+
+
+
+#for HOST in cloud.example.com example.com www.example.com; do
+for HOST in busshi.fr cloud.busshi.fr plex.busshi.fr play.busshi.fr www.busshi.fr; do
+	check
+done
