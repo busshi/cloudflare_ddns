@@ -2,9 +2,9 @@ version: '3'
 
 services:
   cron:
-    image: cron_ddns
+    image: cloudflare_ddns_cron
     build: ./
-    container_name: cron_ddns
+    container_name: cloudflare_ddns_cron
     volumes:
       - ./cron_tasks/1min:/etc/periodic/1min/:ro
       - ./cron_tasks/30min:/etc/periodic/30min/:ro
