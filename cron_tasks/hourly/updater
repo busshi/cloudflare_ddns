@@ -50,7 +50,7 @@ fi
 
 
 
-#for HOST in cloud.example.com example.com www.example.com; do
-for HOST in busshi.fr cloud.busshi.fr plex.busshi.fr play.busshi.fr www.busshi.fr; do
+for HOST in cloud.example.com example.com www.example.com; do
 	check
 done
+`
