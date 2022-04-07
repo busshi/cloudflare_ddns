@@ -2,10 +2,12 @@ version: '3'
 
 services:
   cron:
-    image: cloudflare_ddns_cron
+#    image: cloudflare_ddns_cron
     
-    build: ./
-    
+ #   build: ./
+  
+    image: busshi/cloudflare_ddns_cron:latest
+
     container_name: cloudflare_ddns_cron
     
     volumes:
