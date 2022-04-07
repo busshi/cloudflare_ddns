@@ -1,5 +1,4 @@
-[![CircleCI](https://circleci.com/gh/busshi/portfolio/tree/master.svg?style=shield)](https://circleci.com/gh/busshi/portfolio/tree/master)
-
+[![CircleCI](https://circleci.com/gh/busshi/cloudflare_ddns/tree/master.svg?style=shield)](https://circleci.com/gh/busshi/cloudflare_ddns/tree/master)
 # CLOUDFLARE_DDNS
 
 ## DNS records updater
