@@ -51,6 +51,6 @@ fi
 
 
 #for HOST in cloud.example.com example.com www.example.com; do
-for HOST in $@; do
+for HOST in $SUBDOMAINS; do
 	check
 done
