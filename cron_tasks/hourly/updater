@@ -22,7 +22,7 @@ check()
 ZONE_ID=$( curl -s -X GET "https://api.cloudflare.com/client/v4/zones" \
     -H "X-Auth-Email: ${EMAIL}" \
     -H "Authorization: Bearer ${TOKEN}" \
-    -H "Content-Type: application/json" | jq -r '.result[].id' )
+    -H "Content-Type: application/json" | jq -r '.result[].id' | tail -1 )
 
 echo ""
 echo "[+] HOST: ${HOST}"
@@ -50,7 +50,6 @@ fi
 
 
 
-for HOST in cloud.example.com example.com www.example.com; do
+for HOST in $SUBDOMAINS; do
 	check
 done
-`

@@ -3,14 +3,20 @@ version: '3'
 services:
   cron:
     image: cloudflare_ddns_cron
+    
     build: ./
+    
     container_name: cloudflare_ddns_cron
+    
     volumes:
       - ./cron_tasks/1min:/etc/periodic/1min/:ro
       - ./cron_tasks/30min:/etc/periodic/30min/:ro
       - ./cron_tasks/hourly:/etc/periodic/hourly/:ro
       - ./entrypoint.sh:/usr/local/entrypoint.sh:ro
+    
     environment:
       - TOKEN=${TOKEN}
       - EMAIL=${EMAIL}
+      - SUBDOMAINS=${SUBDOMAINS}
+    
     restart: unless-stopped
