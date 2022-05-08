@@ -1,4 +1,5 @@
-[![CircleCI](https://circleci.com/gh/busshi/cloudflare_ddns/tree/master.svg?style=shield)](https://circleci.com/gh/busshi/cloudflare_ddns/tree/master)
+![build](https://github.com/busshi/cloudflare_ddns/actions/workflows/build.yml/badge.svg)
+
 # CLOUDFLARE_DDNS
 
 ## DNS records updater
@@ -17,7 +18,7 @@ Automate tool to update DNS records in Cloudflare API in case your IP has change
 ```make``` to create a container in detached mode
 
 ### Note:
-This container is build on circleCI and pushed to [dockerhub](https://hub.docker.com/repository/docker/busshi/cloudflare_ddns_cron)
+This container is build on Github and pushed to [dockerhub](https://hub.docker.com/r/busshi/cloudflare_ddns_cron)
 
 ### Reference:
 [Cloudflare API](https://api.cloudflare.com/#dns-records-for-a-zone-properties)
