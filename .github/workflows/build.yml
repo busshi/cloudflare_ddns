@@ -11,7 +11,7 @@ jobs:
  
       - name: Build cloudflare_ddns_cron image
         run: |
-          docker build ./src -t busshi/cloudflare_ddns_cron
+          docker build . -t busshi/cloudflare_ddns_cron
 
       - name: Push image to Dockerhub
         run: |
